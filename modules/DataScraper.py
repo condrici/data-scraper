@@ -18,10 +18,19 @@ class Price:
 
 
 class PriceScraper:
+
+    algorithm_emag_product_page = 'emag_product_page'
+
     def __init__(self, uri):
         self.uri = uri
 
-    def get_price(self) -> Price:
+    def scrape(self, scrape_algorithm) -> Price:
+        if scrape_algorithm != self.algorithm_emag_product_page:
+            raise ValueError('Unknown algorithm used')
+
+        return self.scrape_emag()
+
+    def scrape_emag(self):
         raw_html = requests.get(self.uri)
         soup_data = BeautifulSoup(raw_html.content, "html.parser")
         price_integer = soup_data.select("p.product-new-price")[0].contents[0].text
