@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if MacOS is installed
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  echo "Installation is only supported on MacOS systems"
+  echo "Exiting..."
+  exit
+fi
+
+# Check if Python 3 is installed
+if type -P python3 >/dev/null 2>&1
+  then
+    echo Python 3 is installed, installation will now continue...
+  else
+    echo Python3 is not installed, please install it before deploying project
+    exit
+fi
+
+# shellcheck disable=SC2164
+SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+cd "${SCRIPT_PATH}" && cd ..
+
+# Install project
+python3 -m venv venv # Create virtual environment under folder /venv
+source ./venv/bin/activate # Activate virtual environment
+python3 -m pip install requests bs4 # Install packages
