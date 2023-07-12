@@ -3,8 +3,10 @@ import logging
 from flask import Flask, jsonify, render_template
 from modules.DataScraper import PriceScraper
 from modules import Utilities
+from flasgger import Swagger
 
 app = Flask(__name__)
+Swagger(app, template=Utilities.get_json_from_file('documentation/swagger.json'))
 
 ####################
 # CONFIGURATION
