@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 import logging
+import json
 
 
 def get_logfile_path() -> str:
@@ -15,3 +16,10 @@ def initiate_logging() -> None:
 
 def log(message: str, level: int) -> None:
     logging.log(level=level, msg=message)
+
+
+def get_json_from_file(filepath: str) -> json:
+    with open(filepath) as user_file:
+        file_contents = user_file.read()
+
+    return json.loads(file_contents)
