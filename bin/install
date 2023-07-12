@@ -23,4 +23,6 @@ cd "${SCRIPT_PATH}" && cd ..
 # Install project
 python3 -m venv venv # Create virtual environment under folder /venv
 source ./venv/bin/activate # Activate virtual environment
-python3 -m pip install requests bs4 flask # Install packages
+python3 -m pip install requests bs4 flask flask_api flasgger # Install packages
+python3 -m unittest tests/unit/ # Run unit tests
+python3 api.py # Start api
