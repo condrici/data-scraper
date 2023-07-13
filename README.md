@@ -8,6 +8,7 @@ sh ./bin/install
 
 ### Standards Used
 
+PEP 8 Style Guide \
 Semantic Versioning 2.0 \
 Open API Documentation \
 JSON:API v1.1

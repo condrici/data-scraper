@@ -1,16 +1,23 @@
-import flask_api.status
+"""
+API Entry Point
+This is the API entrypoint with all afferent routes
+"""
+
 import logging
+
+import flask_api.status
 from flask import Flask, jsonify, render_template
+from flasgger import Swagger
+
 from modules.DataScraper import PriceScraper
 from modules import Utilities
-from flasgger import Swagger
+
+####################
+# INITIALIZATION
+####################
 
 app = Flask(__name__)
 Swagger(app, template=Utilities.get_json_from_file('documentation/swagger.json'))
-
-####################
-# CONFIGURATION
-####################
 
 
 @app.errorhandler(404)
