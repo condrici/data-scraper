@@ -1,5 +1,4 @@
-"""
-API Entry Point
+"""API Entry Point
 This is the API entrypoint with all afferent routes
 """
 
@@ -45,9 +44,14 @@ def index(url: str, algorithm: str):
     except BaseException as Ex:
         message = 'Something went wrong'
         Utilities.log(message + ' ' + str(Ex), logging.DEBUG)
-        return jsonify(PriceSchema().dump(PriceSchema())), flask_api.status.HTTP_500_INTERNAL_SERVER_ERROR
 
-    return jsonify(price_schema.dump(price_schema)), flask_api.status.HTTP_200_OK
+        return jsonify(
+            PriceSchema().dump(PriceSchema())
+        ), flask_api.status.HTTP_500_INTERNAL_SERVER_ERROR
+
+    return jsonify(
+        price_schema.dump(price_schema)
+    ), flask_api.status.HTTP_200_OK
 
 
 ####################

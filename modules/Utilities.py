@@ -1,6 +1,6 @@
-"""
-Utilities
-Generic module to temporarily store functionality that might be needed in multiple places
+"""Utilities
+Generic module to temporarily store functionality
+that might be needed in multiple places
 """
 
 from configparser import ConfigParser

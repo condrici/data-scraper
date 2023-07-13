@@ -1,6 +1,6 @@
-"""
-Data Scraping functionality
-It sends an HTTP request, retrieves the HTML data and uses an algorithm to extract the price from it
+"""Data Scraping functionality
+It sends an HTTP request, retrieves the HTML data
+and uses an algorithm to extract the price from it
 """
 
 from modules.SearchAlgorithms import EmagProductPageSearchAlgorithm

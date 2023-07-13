@@ -18,7 +18,9 @@ class PriceFormat:
 class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
     __regex: str = "^[0-9]{1,3}([.]{1}[0-9]{3})*([,]{1}[0-9]+){0,1}$"
 
-    """ Price string is validated and converted into a standardized JSON API schema """
+    """ Price string is validated and converted 
+    into a standardized JSON API schema 
+    """
 
     def get_price(self, price_string: str) -> PriceSchema:
         self.__validate(price_string)
@@ -31,6 +33,9 @@ class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
 
     def __validate(self, price: str) -> bool | ValueError:
         if not re.search(self.__regex, price):
-            raise ValueError("Price doesn't have expected format format_comma_decimal_dot_thousands")
+            raise ValueError(
+                "Price doesn't have expected format "
+                "format_comma_decimal_dot_thousands"
+            )
 
         return True
