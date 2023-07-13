@@ -9,7 +9,8 @@ import flask_api.status
 from flask import Flask, jsonify, render_template
 from flasgger import Swagger
 
-from modules.DataScraper import PriceScraper, PriceSchema
+from modules.DataScraper import PriceScraper
+from modules.Schema import PriceSchema
 from modules import Utilities
 
 ####################
@@ -40,7 +41,7 @@ Utilities.initiate_logging()
 @app.route('/scraper/<path:url>/<algorithm>', methods=['GET'])
 def index(url: str, algorithm: str):
     try:
-        price_schema = PriceScraper(url).scrape(algorithm).get_price()
+        price_schema = PriceScraper(url).scrape(algorithm)
     except BaseException as Ex:
         message = 'Something went wrong'
         Utilities.log(message + ' ' + str(Ex), logging.DEBUG)
