@@ -3,20 +3,19 @@ It sends an HTTP request, retrieves the HTML data
 and uses an algorithm to extract the price from it
 """
 
-from modules.SearchAlgorithms import EmagProductPageSearchAlgorithm
 from modules.Schema import PriceSchema
+from modules.SearchAlgorithms import SearchAlgorithmFactory
 
 
 class PriceScraper:
-    ALGORITHM_EMAG_PRODUCT_PAGE = "emag_product_page"
+    __search_algorithm_factory: SearchAlgorithmFactory
 
-    def __init__(self, uri):
-        self.uri = uri
+    def __init__(self, search_algorithm_factory: SearchAlgorithmFactory):
+        self.__search_algorithm_factory = search_algorithm_factory
 
     """Initiate scraping and determine which algorithm has to be used"""
 
-    def scrape(self, scrape_algorithm: str) -> PriceSchema:
-        if scrape_algorithm != self.ALGORITHM_EMAG_PRODUCT_PAGE:
-            raise ValueError('Unknown algorithm used')
-
-        return EmagProductPageSearchAlgorithm().get_price(self.uri)
+    def scrape(self, scrape_url: str, scrape_algorithm: str) -> PriceSchema:
+        return self.__search_algorithm_factory.create(
+            scrape_algorithm
+        ).get_price(scrape_url)

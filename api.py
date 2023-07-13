@@ -11,6 +11,7 @@ from flasgger import Swagger
 from modules.DataScraper import PriceScraper
 from modules.Schema import PriceSchema
 from modules import Utilities
+from modules.SearchAlgorithms import SearchAlgorithmFactory
 
 ####################
 # INITIALIZATION
@@ -40,7 +41,9 @@ Utilities.initiate_logging()
 @app.route('/scraper/<path:url>/<algorithm>', methods=['GET'])
 def index(url: str, algorithm: str):
     try:
-        price_schema = PriceScraper(url).scrape(algorithm)
+        price_schema = PriceScraper(SearchAlgorithmFactory()).scrape(
+            scrape_url=url, scrape_algorithm=algorithm
+        )
     except BaseException as Ex:
         message = 'Something went wrong'
         Utilities.log(message + ' ' + str(Ex), logging.DEBUG)

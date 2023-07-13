@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 from modules.PriceFormats import CommaDecimalsDotThousandsPriceFormat
 from modules.Schema import PriceSchema
 
+ALGORITHM_EMAG_PRODUCT_PAGE = "emag_product_page"
+
 
 class SearchAlgorithm:
 
@@ -27,3 +29,11 @@ class EmagProductPageSearchAlgorithm(SearchAlgorithm):
 
         return CommaDecimalsDotThousandsPriceFormat().get_price(price_string)
 
+
+class SearchAlgorithmFactory:
+
+    def create(self, algorithm: str) -> SearchAlgorithm:
+        if algorithm == ALGORITHM_EMAG_PRODUCT_PAGE:
+            return EmagProductPageSearchAlgorithm()
+
+        raise ValueError('Unknown algorithm used')
