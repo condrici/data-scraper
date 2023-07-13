@@ -7,15 +7,27 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
+from marshmallow_jsonapi import Schema, fields
+
+
+class PriceSchema(Schema):
+    id = fields.Str(dump_only=True)
+    price = fields.Str()
+
+    class Meta:
+        type_ = "price"
+
+    def create(self):
+        return self
 
 
 class Price:
     FORMAT_COMMA_DECIMAL_DOT_THOUSANDS: str = "comma_decimal_dot_thousands"
 
     __regex_comma_decimal_dot_thousands: str = "^[0-9]{1,3}([.]{1}[0-9]{3})*([,]{1}[0-9]+){0,1}$"
-    __whole_number: int
-    __decimal_number: int | None
-    __decimal_separator: str = ','
+    __whole_number: int                 # Example: 100, 100.000
+    __decimal_number: int | None        # Example: 20 (in 100,20), (in 100.000,30)
+    __decimal_separator: str = ','      # The decimal separator is used to return data consistently
 
     def __init__(self, price: str, price_format: str):
         if price_format != self.FORMAT_COMMA_DECIMAL_DOT_THOUSANDS:
@@ -29,14 +41,15 @@ class Price:
         self.__whole_number = int(price.split(',')[0])
         self.__decimal_number = int(decimal_number) if decimal_number.isnumeric() else None
 
-    def get_price_whole_with_decimal(self) -> str:
+    def get_price(self) -> PriceSchema:
+        price_schema = PriceSchema()
+
         if isinstance(self.__decimal_number, int):
-            return str(self.__whole_number) + self.__decimal_separator + str(self.__decimal_number)
+            price_schema.price = str(self.__whole_number) + self.__decimal_separator + str(self.__decimal_number)
+        else:
+            price_schema.price = self.__whole_number
 
-        return str(self.__whole_number)
-
-    def get_price_whole(self) -> int:
-        return self.__whole_number
+        return price_schema
 
 
 class PriceScraper:

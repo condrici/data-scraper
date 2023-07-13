@@ -9,7 +9,7 @@ import flask_api.status
 from flask import Flask, jsonify, render_template
 from flasgger import Swagger
 
-from modules.DataScraper import PriceScraper
+from modules.DataScraper import PriceScraper, PriceSchema
 from modules import Utilities
 
 ####################
@@ -40,13 +40,13 @@ Utilities.initiate_logging()
 @app.route('/scraper/<path:url>/<algorithm>', methods=['GET'])
 def index(url: str, algorithm: str):
     try:
-        scraped_price = PriceScraper(url).scrape(algorithm).get_price_whole_with_decimal()
+        price_schema = PriceScraper(url).scrape(algorithm).get_price()
     except BaseException as Ex:
         message = 'Something went wrong'
         Utilities.log(message + ' ' + str(Ex), logging.DEBUG)
-        return jsonify({'message': message}), flask_api.status.HTTP_500_INTERNAL_SERVER_ERROR
+        return jsonify(PriceSchema().dump(PriceSchema())), flask_api.status.HTTP_500_INTERNAL_SERVER_ERROR
 
-    return jsonify({'message': scraped_price}), flask_api.status.HTTP_200_OK
+    return jsonify(price_schema.dump(price_schema)), flask_api.status.HTTP_200_OK
 
 
 ####################
