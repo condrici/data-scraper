@@ -3,6 +3,8 @@ from abc import abstractmethod
 
 from modules.Schema import PriceSchema
 
+FORMAT_COMMA_DECIMALS_DOT_THOUSANDS = "comma_decimals_dot_thousands"
+
 
 class PriceFormat:
 
@@ -39,3 +41,11 @@ class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
             )
 
         return True
+
+
+class PriceFormatFactory:
+    def create(self, price_format: str) -> PriceFormat:
+        if price_format == FORMAT_COMMA_DECIMALS_DOT_THOUSANDS:
+            return CommaDecimalsDotThousandsPriceFormat()
+
+        raise ValueError("Unknown price format")
