@@ -5,7 +5,7 @@ Developer notes
 ## PEP 8 Style Guide Observations
 
 - 4 spaces (no tabs) per indentation level 
-  - 79 characters line length (to have multiple files open next to one another) 
+- 79 characters line length (to have multiple files open next to one another, useful when unit testing as well) 
 - UTF-8 file encoding
 - Use trailing commas only when it is expected to extend the list 
 - Function and variable names should be lowercase with underscores 
@@ -29,3 +29,10 @@ Developer notes
 - \__init__.py file turns a set of individual files into one library and then we can use one import line instead of many
 - It is a common practice to use a file called requirements.txt where to add the project requirements
 - Virtual environments give you the ability to isolate your Python development projects from your system installed Python and other Python environments
+
+## Debugging and Unit Testing
+- Only test concrete classes, not abstract classes
+- Use Python's internal logger to output code while running unit tests
+- Method type(class_name) can show you the exact instance of a given object
+- Using @patch on a non-test method might give unexpected results when unit testing
+- Use Python pbd for more debugging
