@@ -7,10 +7,10 @@ from modules.PriceFormats import PriceFormatFactory, \
     FORMAT_COMMA_DECIMALS_DOT_THOUSANDS
 from modules.Schema import PriceSchema
 
-ALGORITHM_EMAG_PRODUCT_PAGE = "emag_product_page"
-
 
 class SearchAlgorithm:
+
+    ALGORITHM_EMAG_PRODUCT_PAGE = "emag_product_page"
 
     @abstractmethod
     def get_price(self, uri: str) -> PriceSchema | ValueError:
@@ -21,7 +21,7 @@ class HtmlScraperFactory:
 
     # The default should be used to get consistent results
     # For more information see the BeautifulSoup internals
-    DEFAULT_PARSER = 'html'
+    DEFAULT_PARSER = 'html.parser'
 
     def create(self, markup, features: str = DEFAULT_PARSER) -> BeautifulSoup:
         return BeautifulSoup(markup=markup, features=features)
@@ -32,13 +32,15 @@ class EmagProductPageSearchAlgorithm(SearchAlgorithm):
     def __init__(
         self,
         price_format_factory: PriceFormatFactory,
-        html_scraper_factory: HtmlScraperFactory
+        html_scraper_factory: HtmlScraperFactory,
+        http_requests: requests
     ):
         self.__price_format_factory = price_format_factory
         self.__html_scraper_factory = html_scraper_factory
+        self.__http_requests = http_requests
 
     def get_price(self, uri: str) -> PriceSchema | ValueError:
-        raw_html = requests.get(uri)
+        raw_html = self.__http_requests.get(uri)
         html_scraper = self.__html_scraper_factory.create(raw_html.content)
 
         # Retrieved price should match the expected format
@@ -54,9 +56,9 @@ class EmagProductPageSearchAlgorithm(SearchAlgorithm):
 class SearchAlgorithmFactory:
 
     def create(self, algorithm: str) -> SearchAlgorithm:
-        if algorithm == ALGORITHM_EMAG_PRODUCT_PAGE:
+        if algorithm == SearchAlgorithm.ALGORITHM_EMAG_PRODUCT_PAGE:
             return EmagProductPageSearchAlgorithm(
-                PriceFormatFactory(), HtmlScraperFactory()
+                PriceFormatFactory(), HtmlScraperFactory(), requests
             )
 
         raise ValueError('Unknown algorithm used')
