@@ -58,7 +58,9 @@ class SearchAlgorithmFactory:
     def create(self, algorithm: str) -> SearchAlgorithm:
         if algorithm == SearchAlgorithm.ALGORITHM_EMAG_PRODUCT_PAGE:
             return EmagProductPageSearchAlgorithm(
-                PriceFormatFactory(), HtmlScraperFactory(), requests
+                http_requests=requests,
+                html_scraper_factory=HtmlScraperFactory(),
+                price_format_factory=PriceFormatFactory()
             )
 
         raise ValueError('Unknown algorithm used')

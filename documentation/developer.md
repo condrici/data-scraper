@@ -31,8 +31,9 @@ Developer notes
 - Virtual environments give you the ability to isolate your Python development projects from your system installed Python and other Python environments
 
 ## Debugging and Unit Testing
+- Most common testing tools and debugging: pytest, unittest, coverage.py, pbd
 - Only test concrete classes, not abstract classes
 - Use Python's internal logger to output code while running unit tests
-- Method type(class_name) can show you the exact instance of a given object
+- Use print statements like type(class_name) which can show you the exact instance of a given object
 - Using @patch on a non-test method might give unexpected results when unit testing
-- Use Python pbd for more debugging
+- Right click in swagger files in pyCharm - show context actions - sort fields alphabetically

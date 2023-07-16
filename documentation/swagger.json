@@ -8,14 +8,14 @@
     "paths": {
         "/scraper/{url}/{algorithm}": {
             "get": {
-                "summary": "Retrieve price from url",
                 "parameters": [
                     {
                         "in": "path",
                         "name": "url",
-                        "type": "string",
                         "description": "website url that contains the price",
-                        "required": true
+                        "required": true,
+                        "type": "string",
+                        "format": "url encoded"
                     },
                     {
                         "in": "path",
@@ -32,7 +32,8 @@
                     "500": {
                         "description": "Internal Server Error"
                     }
-                }
+                },
+                "summary": "Retrieve price from url"
             }
         }
     }
