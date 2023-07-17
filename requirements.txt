@@ -4,3 +4,4 @@ flask
 flask_api
 flasgger
 marshmallow-jsonapi
+coverage
