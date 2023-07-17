@@ -58,7 +58,7 @@ class TestEmagProductPageSearchAlgorithm(unittest.TestCase):
 
     def __get_algorithm_mocked(self, request_object, html_code: str):
 
-        # While the algorithm is mocked, BeautifulSoup performs an actual tests
+        # While the algorithm is mocked, BeautifulSoup performs an actual test
         # where the scraper actually extracts the price from the HTML
 
         request_object.content = html_code
