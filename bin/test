@@ -1,0 +1,12 @@
+#!/bin/bash
+
+####################
+# TEST
+####################
+
+python3 -m venv venv # Create virtual environment under folder /venv
+source ./venv/bin/activate # Activate virtual environment
+
+coverage run -m unittest tests.unit # Run tests
+coverage report # Generate console test coverage (.coverage)
+coverage html # Generate html test coverage (htmlcov/index.html)
