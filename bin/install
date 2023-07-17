@@ -49,5 +49,5 @@ cd "${SCRIPT_PATH}" && cd ..
 python3 -m venv venv # Create virtual environment under folder /venv
 source ./venv/bin/activate # Activate virtual environment
 python3 -m pip install -r requirements.txt # Install packages
-python3 -m unittest tests/unit/ # Run unit tests
+python3 -m unittest tests.unit # Run unit tests
 python3 api.py # Start api
