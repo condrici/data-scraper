@@ -69,15 +69,18 @@ class TestCommaDecimalsDotThousandsPriceFormat(unittest.TestCase):
 
     def __get_invalid_value_formats(self):
         return [
+            ',', '.', '#', '!', '...', '~', '@', '-', '?', '%', '"',
+            '.0', ',0', '.000', ',000',
             '1000', '1000,' '1000.', '1000.,'
-            '1.0', '1.00', '1,0,0',
+            '1.0', '1.00', '1,0,0', '1.1.1', '1,00',
             '100,000,000', '100,000.000', '100.000,000,000'
         ]
 
     def __get_valid_value_formats(self):
         return [
-            '1', '10', '100',
-            '1.000', '100,10', '100.000', '100.000.000', '100.000,10'
+            '1', '10', '100',                     # whole numbers
+            '1.000', '100.000', '100.000.000',    # with thousands
+            '100,10', '100,20', '100.000.000,20'  # with decimals
         ]
 
     def __is_property_in_object(self, single_object: object, attributes: list):
