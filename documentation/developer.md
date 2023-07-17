@@ -20,20 +20,32 @@ Developer notes
 - Module level “dunders” such as __all__, __author__, should be placed after the module docstring but before any import statements
 - Use either single quotes or double quotes but keep consistency in your code
 
+## How does the Python Interpreter work?
+1) Before executing code, Python interpreter reads source file and define few special variables/global variables
+2) If the python interpreter is running that module (the source file) as the main program, it sets the special \__name__ variable to have a value “\__main__”
+3) If this file is being imported from another module, \__name__ will be set to the module’s name. Module’s name is available as value to \__name__ global variable
+
 ## Syntax Characteristics
 - Python is a scripting, general-purpose, cross-platform, high-level and interpreted programming language
 - Getters and setters are usually avoided, use instead class properties
 - For method/properties access levels use __(private), _(protected) or none for public
 - Import statements are relative to the main script entrypoint unless \_\_name__ is used
 - \__init__ method is the Python equivalent of the C++ constructor in an object-oriented approach
-- \__init__.py file turns a set of individual files into one library and then we can use one import line instead of many
+- \__init__.py is a special Python file that is used to indicate that the directory it is present in is a Python package
+- \__init__.py can contain initialisation code for the package or it can be an empty file
+- packages are a way to structure Python's module namespace by using "dotted module names"
 - It is a common practice to use a file called requirements.txt where to add the project requirements
 - Virtual environments give you the ability to isolate your Python development projects from your system installed Python and other Python environments
+- Data types: str, int, float, complex, list, tuple, range, dict, set, frozenset, bool, bytes, bytearray, memoryview, NoneType
 
 ## Debugging and Unit Testing
 - Most common testing tools and debugging: pytest, unittest, coverage.py, pbd
 - Only test concrete classes, not abstract classes
 - Use Python's internal logger to output code while running unit tests
-- Use print statements like type(class_name) which can show you the exact instance of a given object
+- Use print statements like type(class_name) which can show the exact data type
 - Using @patch on a non-test method might give unexpected results when unit testing
 - Right click in swagger files in pyCharm - show context actions - sort fields alphabetically
+
+## Legal Considerations
+- Web scraping is legal as long as you scrape public information available on the internet
+- Scraping personal data or intellectual property is not legal
