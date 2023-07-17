@@ -29,7 +29,7 @@ class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
 
         price_schema = PriceSchema()
         price_schema.price = price_string
-        price_schema.whole_price = int(price_string.split(',')[0])
+        price_schema.whole_price = price_string.split(',')[0]
 
         return price_schema
 
