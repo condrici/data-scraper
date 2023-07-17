@@ -1,20 +1,45 @@
 #!/bin/bash
 
-# Check if MacOS is installed
+####################
+# PRE-REQUIREMENTS
+####################
+
+PYTHON_REQUIRED_MAJOR_VERSION='3'
+PYTHON_REQUIRED_MINOR_VERSION='4'
+
+# Pre-Requirements: MacOS
+
 if [[ "$OSTYPE" != "darwin"* ]]; then
   echo "Installation is only supported on MacOS systems"
   echo "Exiting..."
   exit
 fi
 
-# Check if Python 3 is installed
+# Pre-Requirements: Python 3
+
 if type -P python3 >/dev/null 2>&1
   then
     echo Python 3 is installed, installation will now continue...
   else
     echo Python3 is not installed, please install it before deploying project
+fi
+
+# Pre-Requirements: Python 3.4+
+
+PYTHON_INSTALLED_MINOR_VERSION=$(
+python3 -c "
+import sys;
+minor_version=f'{sys.version_info.minor}';
+print(minor_version)")
+
+if (( $(echo "$PYTHON_INSTALLED_MINOR_VERSION < $PYTHON_REQUIRED_MINOR_VERSION" |bc -l) )); then
+    echo "You need at least Python $PYTHON_REQUIRED_MAJOR_VERSION version $PYTHON_REQUIRED_MINOR_VERSION, aborting..."
     exit
 fi
+
+####################
+# INSTALLATION
+####################
 
 # shellcheck disable=SC2164
 SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
