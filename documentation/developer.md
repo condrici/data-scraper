@@ -37,6 +37,7 @@ Developer notes
 - It is a common practice to use a file called requirements.txt where to add the project requirements
 - Virtual environments give you the ability to isolate your Python development projects from your system installed Python and other Python environments
 - Data types: str, int, float, complex, list, tuple, range, dict, set, frozenset, bool, bytes, bytearray, memoryview, NoneType
+- Abstract classes are referred to as ABC
 
 ## Debugging and Unit Testing
 - Most common testing tools and debugging: pytest, unittest, coverage.py, pbd
@@ -45,6 +46,8 @@ Developer notes
 - Use print statements like type(class_name) which can show the exact data type
 - Using @patch on a non-test method might give unexpected results when unit testing
 - Right click in swagger files in pyCharm - show context actions - sort fields alphabetically
+- Return type is not validated by Python at runtime, you need a separate off-line type checker which users can run over their source code voluntarily
+- To check return type, you need packages like mypy, pytype, pyright/pylance, pyre, 
 
 ## Legal Considerations
 - Web scraping is legal as long as you scrape public information available on the internet

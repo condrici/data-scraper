@@ -12,11 +12,12 @@ PEP 8 Style Guide \
 Semantic Versioning 2.0 \
 Open API Documentation 2.0 \
 JSON:API v1.0 \
-Unittest Coverage +85%
 
 ### Documentation
 http://localhost:8000/apidocs
 
-### Debugging
+### Testing & Debugging
 
-logs/application.log
+Unittest Coverage +85%
+Static Code Analysis
+Logs (logs/application.log)
