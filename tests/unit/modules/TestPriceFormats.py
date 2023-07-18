@@ -55,13 +55,8 @@ class TestCommaDecimalsDotThousandsPriceFormat(unittest.TestCase):
             price_schema = price_format.get_price(price_string)
 
             # Test mandatory attributes
-
-            self.assertEqual(
-                self.__is_property_in_object(
-                    price_schema, self.PRICE_SCHEMA_MANDATORY_ATTRIBUTES
-                ),
-                True
-            )
+            self.assertEqual(hasattr(price_schema, 'price'), True)
+            self.assertEqual(hasattr(price_schema, 'whole_price'), True)
 
             # Test mandatory attribute values
 
@@ -82,9 +77,3 @@ class TestCommaDecimalsDotThousandsPriceFormat(unittest.TestCase):
             '1.000', '100.000', '100.000.000',    # with thousands
             '100,10', '100,20', '100.000.000,20'  # with decimals
         ]
-
-    def __is_property_in_object(self, single_object: object, attributes: list):
-        for single_attribute in attributes:
-            if not hasattr(single_object, single_attribute):
-                return False
-        return True
