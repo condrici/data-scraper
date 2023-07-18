@@ -17,7 +17,7 @@ pip3 install pyre-check fb-sapp # Install packages in virtual environment
 
 ####################
 # COMMANDS
-# All the commands below should be execute in the virtual environment
+# All the commands below should be executed in the virtual environment
 ####################
 
 ## Initialize Pysa and SAPP (will fail if .pyre_configuration already exists)
