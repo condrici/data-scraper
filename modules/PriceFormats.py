@@ -1,5 +1,5 @@
 import re
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 from modules.Schema import PriceSchema
 
@@ -24,7 +24,7 @@ class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
     into a standardized JSON API schema 
     """
 
-    def get_price(self, price_string: str) -> PriceSchema:
+    def get_price(self, price_string: str) -> PriceSchema | ValueError:
         self.__validate(price_string)
 
         price_schema = PriceSchema()

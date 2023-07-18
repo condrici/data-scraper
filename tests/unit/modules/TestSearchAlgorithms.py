@@ -8,7 +8,7 @@ from modules.PriceFormats import PriceFormatFactory
 
 class TestSearchAlgorithmFactory(unittest.TestCase):
 
-    def test_create(self):
+    def test_create(self) -> None:
         with self.assertRaises(ValueError) as context:
             SearchAlgorithmFactory().create('nonexistent_algorithm')
 
@@ -28,7 +28,7 @@ class TestSearchAlgorithmFactory(unittest.TestCase):
 class TestEmagProductPageSearchAlgorithm(unittest.TestCase):
 
     @patch('requests.models.Request')
-    def test_get_price(self, request_object):
+    def test_get_price(self, request_object) -> None:
 
         # Test with a valid HTML CODE
 

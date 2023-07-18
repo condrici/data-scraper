@@ -10,7 +10,7 @@ from modules.SearchAlgorithms import SearchAlgorithmFactory
 class PriceScraper:
     __search_algorithm_factory: SearchAlgorithmFactory
 
-    def __init__(self, search_algorithm_factory: SearchAlgorithmFactory):
+    def __init__(self, search_algorithm_factory: SearchAlgorithmFactory) -> None:
         self.__search_algorithm_factory = search_algorithm_factory
 
     """Initiate scraping and determine which algorithm has to be used"""

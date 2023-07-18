@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from marshmallow_jsonapi import Schema, fields
 
 
@@ -9,5 +11,5 @@ class PriceSchema(Schema):
     class Meta:
         type_ = "price"
 
-    def create(self):
+    def create(self) -> PriceSchema:
         return self

@@ -7,7 +7,7 @@ from modules.SearchAlgorithms import SearchAlgorithmFactory
 
 class TestPriceScraper(unittest.TestCase):
 
-    def test_scrape(self):
+    def test_scrape(self) -> None:
 
         # Test with nonexistent algorithm
         # The url parameter is not validated currently TODO: Validate URL

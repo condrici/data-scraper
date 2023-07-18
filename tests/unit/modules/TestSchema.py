@@ -7,7 +7,7 @@ from modules.Schema import PriceSchema
 
 class TestSchema(unittest.TestCase):
 
-    def test_create(self):
+    def test_create(self) -> None:
         price_schema = PriceSchema().create()
         price_schema.price = '100,10'
         price_schema.whole_price = '100'

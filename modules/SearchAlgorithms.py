@@ -34,7 +34,7 @@ class EmagProductPageSearchAlgorithm(SearchAlgorithm):
         price_format_factory: PriceFormatFactory,
         html_scraper_factory: HtmlScraperFactory,
         http_requests: requests
-    ):
+    ) -> None:
         self.__price_format_factory = price_format_factory
         self.__html_scraper_factory = html_scraper_factory
         self.__http_requests = http_requests

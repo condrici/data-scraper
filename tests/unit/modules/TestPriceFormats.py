@@ -5,7 +5,7 @@ from modules.PriceFormats import PriceFormatFactory, PriceFormat, \
 
 class TestPriceFormatFactory(unittest.TestCase):
 
-    def test_create(self):
+    def test_create(self) -> None:
         with self.assertRaises(ValueError) as context:
             PriceFormatFactory().create('nonexistent_price_format')
 
@@ -25,7 +25,7 @@ class TestCommaDecimalsDotThousandsPriceFormat(unittest.TestCase):
 
     PRICE_SCHEMA_MANDATORY_ATTRIBUTES = ['price', 'whole_price']
 
-    def test_get_price(self):
+    def test_get_price(self) -> None:
         self.__xtest_prices_with_incorrect_format()
         self.__xtest_prices_with_correct_format()
 

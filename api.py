@@ -23,7 +23,7 @@ Swagger(app, template=Utilities.get_json_from_file('documentation/swagger.json')
 
 @app.errorhandler(404)
 # inbuilt function which takes error as parameter
-def not_found(e):
+def not_found(e) -> str:
     # defining function
     return render_template("404.html")
 
