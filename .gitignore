@@ -1,8 +1,19 @@
+# Editor
 .idea
+
+# Python
 __pycache__/
 *.py[cod]
 venv
 env
+
+# Application
 logs
+
+# Testing & Debugging
 .coverage
 htmlcov
+.pyre
+.pyre_configuration
+pysa-runs/
+sapp.db

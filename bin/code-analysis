@@ -1,0 +1,35 @@
+#!/bin/bash
+
+####################
+# CODE ANALYSIS
+####################
+
+# Install dependencies
+
+python3 -m pip install --upgrade setuptools
+pip3 install wheel
+
+# Prepare virtual environment
+
+python3 -m venv ~/.venvs/pysa # Create virtual environment
+source ~/.venvs/pysa/bin/activate # Activate virtual environment
+pip3 install pyre-check fb-sapp # Install packages in virtual environment
+
+####################
+# COMMANDS
+# All the commands below should be execute in the virtual environment
+####################
+
+## Initialize Pysa and SAPP (will fail if .pyre_configuration already exists)
+## pyre init-pysa
+
+## Run Pysa
+## pyre analyze --no-verify --save-results-to ./pysa-runs
+
+## Run SAPP
+## sapp analyze ./pysa-runs/taint-output.json
+
+## Run SAPP server
+## sapp server
+
+####################
