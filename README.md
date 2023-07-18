@@ -18,6 +18,7 @@ http://localhost:8000/apidocs
 
 ### Testing & Debugging
 
-Unittest Coverage +85%
-Static Code Analysis
+Unittest Coverage +85% \
+Static Code Analysis \
+Profiler \
 Logs (logs/application.log)

@@ -3,6 +3,8 @@ This is the API entrypoint with all afferent routes
 """
 
 import logging
+import cProfile
+import re        # used by cProfile.run
 
 import flask_api.status
 from flask import Flask, jsonify, render_template
@@ -19,6 +21,7 @@ from modules.SearchAlgorithms import SearchAlgorithmFactory
 
 app = Flask(__name__)
 Swagger(app, template=Utilities.get_json_from_file('documentation/swagger.json'))
+cProfile.run('re.compile("foo|bar")')
 
 
 @app.errorhandler(404)
