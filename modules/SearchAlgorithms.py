@@ -3,8 +3,9 @@ from abc import abstractmethod
 import requests
 from bs4 import BeautifulSoup
 
-from modules.PriceFormats import PriceFormatFactory, \
-    FORMAT_COMMA_DECIMALS_DOT_THOUSANDS
+from modules.PriceFormats import (
+    PriceFormatFactory, FORMAT_COMMA_DECIMALS_DOT_THOUSANDS
+)
 from modules.Schema import PriceSchema
 
 

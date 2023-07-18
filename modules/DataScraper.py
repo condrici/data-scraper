@@ -16,6 +16,6 @@ class PriceScraper:
     """Initiate scraping and determine which algorithm has to be used"""
 
     def scrape(self, scrape_url: str, scrape_algorithm: str) -> PriceSchema:
-        return self.__search_algorithm_factory.create(
-            scrape_algorithm
-        ).get_price(scrape_url)
+        algorithm = self.__search_algorithm_factory.create(scrape_algorithm)
+        return algorithm.get_price(scrape_url)
+

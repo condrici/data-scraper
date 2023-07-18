@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch, MagicMock
 
-from modules.SearchAlgorithms import SearchAlgorithm, SearchAlgorithmFactory, \
+from modules.SearchAlgorithms import (
+    SearchAlgorithm, SearchAlgorithmFactory,
     EmagProductPageSearchAlgorithm, HtmlScraperFactory
+)
 from modules.PriceFormats import PriceFormatFactory
 
 

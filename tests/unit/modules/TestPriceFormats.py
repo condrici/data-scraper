@@ -1,6 +1,9 @@
 import unittest
-from modules.PriceFormats import PriceFormatFactory, PriceFormat, \
-    CommaDecimalsDotThousandsPriceFormat, FORMAT_COMMA_DECIMALS_DOT_THOUSANDS
+
+from modules.PriceFormats import (
+    PriceFormatFactory, PriceFormat, CommaDecimalsDotThousandsPriceFormat,
+    FORMAT_COMMA_DECIMALS_DOT_THOUSANDS
+)
 
 
 class TestPriceFormatFactory(unittest.TestCase):
