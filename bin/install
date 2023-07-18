@@ -5,7 +5,7 @@
 ####################
 
 PYTHON_REQUIRED_MAJOR_VERSION='3'
-PYTHON_REQUIRED_MINOR_VERSION='4'
+PYTHON_REQUIRED_MINOR_VERSION='7'
 
 # Pre-Requirements: MacOS
 
@@ -37,6 +37,15 @@ if (( $(echo "$PYTHON_INSTALLED_MINOR_VERSION < $PYTHON_REQUIRED_MINOR_VERSION" 
     exit
 fi
 
+# Pre-Requirements: PIP 3
+
+if type -P pip3 >/dev/null 2>&1
+  then
+    echo Pip 3 is installed, installation will now continue...
+  else
+    echo Pip 3 is not installed, please install it before deploying project
+fi
+
 ####################
 # INSTALLATION
 ####################
@@ -45,11 +54,18 @@ fi
 SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 cd "${SCRIPT_PATH}" && cd ..
 
-# Install project
+# Prepare virtual environment
+
 python3 -m venv venv # Create virtual environment under folder /venv
 source ./venv/bin/activate # Activate virtual environment
-python3 -m pip install -r requirements.txt # Install packages
+python3 -m pip install -r requirements.txt # Install packages in virtual env
+
+# Run unit tests an generate coverage reports
+
 coverage run -m unittest tests.unit # Run tests
-coverage report # Generate console test coverage (.coverage)
-coverage html # Generate html test coverage (htmlcov/index.html)
+coverage report # Generate console unittest coverage (.coverage)
+coverage html # Generate html unittest coverage (htmlcov/index.html)
+
+# Start API
+
 python3 api.py # Start api
