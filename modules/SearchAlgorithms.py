@@ -41,7 +41,9 @@ class EmagProductPageSearchAlgorithm(SearchAlgorithm):
         self.__http_requests = http_requests
 
     def get_price(self, uri: str) -> PriceSchema | ValueError:
-        raw_html = self.__http_requests.get(uri)
+        # TODO: Replace hardcoded headers
+        headers = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13.4; rv:109.0) Gecko/20100101 Firefox/115.0'}
+        raw_html = self.__http_requests.get(url=uri, headers=headers)
         html_scraper = self.__html_scraper_factory.create(raw_html.content)
 
         # Retrieved price should match the expected format
