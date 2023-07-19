@@ -17,9 +17,15 @@ class PriceFormat:
     def get_price(self, price: str) -> PriceSchema | ValueError:
         pass
 
-    @abstractmethod
-    def __validate(self, price: str) -> bool | ValueError:
-        pass
+    """ Validation has to be used in the get_price implementation """
+    def _validate(self, price: str, regex) -> bool | ValueError:
+        if not re.search(regex, price):
+            raise ValueError(
+                "Price doesn't have expected format "
+                "format_comma_decimal_dot_thousands"
+            )
+
+        return True
 
 
 class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
@@ -30,22 +36,13 @@ class CommaDecimalsDotThousandsPriceFormat(PriceFormat):
     """
 
     def get_price(self, price_string: str) -> PriceSchema | ValueError:
-        self.__validate(price_string)
+        self._validate(price_string, self.__regex)
 
         price_schema = PriceSchema()
         price_schema.price = price_string
         price_schema.whole_price = price_string.split(',')[0]
 
         return price_schema
-
-    def __validate(self, price: str) -> bool | ValueError:
-        if not re.search(self.__regex, price):
-            raise ValueError(
-                "Price doesn't have expected format "
-                "format_comma_decimal_dot_thousands"
-            )
-
-        return True
 
 
 class PriceFormatFactory:
