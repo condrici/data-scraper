@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ######################
-# UNITTEST
+# INITIALIZE
 ######################
 
 # Prepare virtual environment
@@ -12,5 +12,5 @@ source ./venv/bin/activate # Activate virtual environment
 # Run unittests and generate coverage reports
 
 coverage run -m unittest tests.unit # Run tests
-coverage report # Generate console unittest coverage (.coverage)
+coverage html -d coverage_html_unit # Generate html unittest coverage
 coverage html # Generate html unittest coverage (htmlcov/index.html)

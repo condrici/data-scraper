@@ -17,3 +17,5 @@ htmlcov
 .pyre_configuration
 pysa-runs/
 sapp.db
+coverage_html_unit/
+coverage_html_api/
