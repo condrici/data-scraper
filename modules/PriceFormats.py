@@ -1,5 +1,5 @@
 import re
-from abc import abstractmethod, ABC
+from abc import abstractmethod
 
 from modules.Schema import PriceSchema
 
@@ -8,8 +8,13 @@ FORMAT_COMMA_DECIMALS_DOT_THOUSANDS = "comma_decimals_dot_thousands"
 
 class PriceFormat:
 
+    @property
     @abstractmethod
-    def get_price(self, uri: str) -> PriceSchema | ValueError:
+    def __regex(self) -> str:
+        pass
+
+    @abstractmethod
+    def get_price(self, price: str) -> PriceSchema | ValueError:
         pass
 
     @abstractmethod
