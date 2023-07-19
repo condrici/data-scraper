@@ -25,9 +25,8 @@ Developer notes
 2) If the python interpreter is running that module (the source file) as the main program, it sets the special \__name__ variable to have a value “\__main__”
 3) If this file is being imported from another module, \__name__ will be set to the module’s name. Module’s name is available as value to \__name__ global variable
 
-## Syntax Characteristics
+## Python 3 General Syntax
 - Python is a scripting, general-purpose, cross-platform, high-level and interpreted programming language
-- Getters and setters are usually avoided, use instead class properties
 - For method/properties access levels use __(private), _(protected) or none for public
 - Import statements are relative to the main script entrypoint unless \_\_name__ is used
 - \__init__ method is the Python equivalent of the C++ constructor in an object-oriented approach
@@ -37,7 +36,10 @@ Developer notes
 - It is a common practice to use a file called requirements.txt where to add the project requirements
 - Virtual environments give you the ability to isolate your Python development projects from your system installed Python and other Python environments
 - Data types: str, int, float, complex, list, tuple, range, dict, set, frozenset, bool, bytes, bytearray, memoryview, NoneType
-- Abstract classes are referred to as ABC
+- Because of the nature of text editors on non-UNIX platforms, it is unwise to use a mixture of spaces and tabs for the indentation in a single source file
+
+## Python 3 More Syntax
+- You cannot access subclass attributes from a parent class (unless the parent class defines a protocol allowing subclasses to let the parent class access its attributes like in Django or PHP)
 
 ## Debugging and Unit Testing
 - Most common testing tools and debugging: pytest, unittest, coverage.py, pbd
