@@ -9,8 +9,18 @@
 python3 -m venv venv # Create virtual environment under folder /venv
 source ./venv/bin/activate # Activate virtual environment
 
-# Run unittests and generate coverage reports
+######################
+# UNIT TESTS
+######################
 
-coverage run -m unittest tests.unit # Run tests
+coverage run -m unittest tests.unit # Run unit tests
+coverage report -m # Generate console unittest coverage (.coverage)
 coverage html -d coverage_html_unit # Generate html unittest coverage
-coverage html # Generate html unittest coverage (htmlcov/index.html)
+
+######################
+# API TESTS
+######################
+
+coverage run -m unittest tests.api  # Run api tests
+coverage report -m # Generate console unittest coverage (.coverage)
+coverage html -d coverage_html_api # Generate html unittest coverage
