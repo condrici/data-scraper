@@ -3,6 +3,7 @@ from abc import abstractmethod
 import requests
 from bs4 import BeautifulSoup
 
+from modules.Http import HttpRequest, HttpRequestSettings
 from modules.PriceFormats import (
     PriceFormatFactory, FORMAT_COMMA_DECIMALS_DOT_THOUSANDS
 )
@@ -34,16 +35,14 @@ class EmagProductPageSearchAlgorithm(SearchAlgorithm):
         self,
         price_format_factory: PriceFormatFactory,
         html_scraper_factory: HtmlScraperFactory,
-        http_requests: requests
+        http_request: HttpRequest
     ) -> None:
         self.__price_format_factory = price_format_factory
         self.__html_scraper_factory = html_scraper_factory
-        self.__http_requests = http_requests
+        self.__http_request = http_request
 
     def get_price(self, uri: str) -> PriceSchema | ValueError:
-        # TODO: Replace hardcoded headers
-        headers = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13.4; rv:109.0) Gecko/20100101 Firefox/115.0'}
-        raw_html = self.__http_requests.get(url=uri, headers=headers)
+        raw_html = self.__http_request.get(url=uri)
         html_scraper = self.__html_scraper_factory.create(raw_html.content)
 
         # Retrieved price should match the expected format
@@ -60,8 +59,13 @@ class SearchAlgorithmFactory:
 
     def create(self, algorithm: str) -> SearchAlgorithm:
         if algorithm == SearchAlgorithm.ALGORITHM_EMAG_PRODUCT_PAGE:
+
+            default_request_settings = HttpRequestSettings(
+                use_default_user_agent=True
+            )
+
             return EmagProductPageSearchAlgorithm(
-                http_requests=requests,
+                http_request=HttpRequest(requests, default_request_settings),
                 html_scraper_factory=HtmlScraperFactory(),
                 price_format_factory=PriceFormatFactory()
             )
