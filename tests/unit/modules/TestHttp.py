@@ -1,7 +1,5 @@
 import unittest
 from unittest.mock import patch, MagicMock
-
-import requests.utils
 from requests import Response
 
 from modules.Http import HttpRequestSettings, HttpRequest, DEFAULT_USER_AGENT
@@ -23,11 +21,12 @@ class TestHttpRequestSettings(unittest.TestCase):
 class TestHttpRequest(unittest.TestCase):
 
     def test_get_with_http_headers_user_agent(self) -> None:
-        request_settings = HttpRequestSettings(use_default_user_agent=True)
         request_api_mock = self.__get_mock_request_api()
-        http_request = HttpRequest(request_api_mock, request_settings)
+        http_request = self.__get_requset_decorator(request_api_mock)
 
         # Filled headers= with user-agent
+        # When this happens, the settings set in headers=
+        # will take precedence
 
         http_response = http_request.get(
             'http://example.com',
@@ -43,11 +42,12 @@ class TestHttpRequest(unittest.TestCase):
         )
 
     def test_get_with_empty_http_headers(self) -> None:
-        request_settings = HttpRequestSettings(use_default_user_agent=True)
         request_api_mock = self.__get_mock_request_api()
-        http_request = HttpRequest(request_api_mock, request_settings)
+        http_request = self.__get_requset_decorator(request_api_mock)
 
-        # Empty headers=
+        # Empty headers={}
+        # When this happens, the settings defined in HttpRequestSettings,
+        # like the user-agent, will take precedence
 
         http_response = http_request.get(
             'http://example.com',
@@ -63,11 +63,12 @@ class TestHttpRequest(unittest.TestCase):
         self.assertIsInstance(http_response, Response)
 
     def test_get_with_unset_http_headers(self) -> None:
-        request_settings = HttpRequestSettings(use_default_user_agent=True)
         request_api_mock = self.__get_mock_request_api()
-        http_request = HttpRequest(request_api_mock, request_settings)
+        http_request = self.__get_requset_decorator(request_api_mock)
 
-        # Unset headers=
+        # Undefined headers=
+        # When this happens, the settings defined in HttpRequestSettings,
+        # like the user-agent, will take precedence
 
         http_response = http_request.get(
             'http://example.com',
@@ -80,6 +81,10 @@ class TestHttpRequest(unittest.TestCase):
             params=None
         )
         self.assertIsInstance(http_response, Response)
+
+    def __get_requset_decorator(self, request_api_mock) -> HttpRequest:
+        request_settings = HttpRequestSettings(use_default_user_agent=True)
+        return HttpRequest(request_api_mock, request_settings)
 
     def __get_mock_request_api(self) -> MagicMock:
         request_api = MagicMock()
