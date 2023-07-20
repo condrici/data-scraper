@@ -39,7 +39,8 @@ Developer notes
 - Because of the nature of text editors on non-UNIX platforms, it is unwise to use a mixture of spaces and tabs for the indentation in a single source file
 
 ## Python 3 More Syntax
-- You cannot access subclass attributes from a parent class (unless the parent class defines a protocol allowing subclasses to let the parent class access its attributes like in Django or PHP)
+- You cannot access subclass attributes from a parent class, even abstract (unless the parent class defines a protocol allowing subclasses to let the parent class access its attributes like in Django or PHP)
+- When mocking in Python, make sure you are not trying to mock a package (__init__.py) because it won't work, but a module within the package
 
 ## Debugging and Unit Testing
 - Most common testing tools and debugging: pytest, unittest, coverage.py, pbd
