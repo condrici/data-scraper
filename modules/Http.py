@@ -1,8 +1,7 @@
 """ Decorator for the requests module """
-
 from typing import Optional, Dict
 
-import requests
+from requests import api
 from requests.models import Response
 
 DEFAULT_USER_AGENT = 'Mozilla/5.0 ' \
@@ -11,9 +10,10 @@ DEFAULT_USER_AGENT = 'Mozilla/5.0 ' \
 
 
 class HttpRequestSettings:
-    __use_default_user_agent: bool = False
-
-    def __init__(self, use_default_user_agent: Optional[bool]):
+    def __init__(
+            self,
+            use_default_user_agent: Optional[bool] = False
+    ):
         self.__use_default_user_agent = use_default_user_agent
 
     def get_use_default_user_agent(self):
@@ -22,15 +22,15 @@ class HttpRequestSettings:
 
 class HttpRequest:
 
-    __request: requests
+    __request: api
     __request_settings: HttpRequestSettings
 
     def __init__(
         self,
-        requests_module: requests,
+        request_api: api,
         request_settings: HttpRequestSettings
     ):
-        self.__request = requests_module
+        self.__request = request_api
         self.__request_settings = request_settings
 
     """ HTTP GET REQUEST """
@@ -56,12 +56,9 @@ class HttpRequest:
 
     def __update_empty_kwargs_with_default_settings(
         self,
-        decorator_settings: Optional[HttpRequestSettings],
+        decorator_settings: HttpRequestSettings,
         **kwargs: Dict
     ) -> Optional[Dict]:
-        if type(decorator_settings) != HttpRequestSettings:
-            return kwargs
-
         if decorator_settings.get_use_default_user_agent():
             kwargs = self.__add_default_http_headers(
                 'user-agent', kwargs

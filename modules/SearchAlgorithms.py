@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-import requests
+from requests import api
 from bs4 import BeautifulSoup
 
 from modules.Http import HttpRequest, HttpRequestSettings
@@ -59,13 +59,11 @@ class SearchAlgorithmFactory:
 
     def create(self, algorithm: str) -> SearchAlgorithm:
         if algorithm == SearchAlgorithm.ALGORITHM_EMAG_PRODUCT_PAGE:
-
-            default_request_settings = HttpRequestSettings(
-                use_default_user_agent=True
-            )
-
             return EmagProductPageSearchAlgorithm(
-                http_request=HttpRequest(requests, default_request_settings),
+                http_request=HttpRequest(
+                    api,
+                    HttpRequestSettings(use_default_user_agent=True)
+                ),
                 html_scraper_factory=HtmlScraperFactory(),
                 price_format_factory=PriceFormatFactory()
             )
