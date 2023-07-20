@@ -21,6 +21,6 @@ coverage html -d coverage_html_unit # Generate html unit test coverage
 # API TESTS
 ######################
 
-#coverage run -m unittest tests.api  # Run api tests
-#coverage report -m # Generate console api test coverage (.coverage)
-#coverage html -d coverage_html_api # Generate html unittest coverage
+coverage run -m unittest tests.api  # Run api tests
+coverage report -m # Generate console api test coverage (.coverage)
+coverage html -d coverage_html_api # Generate html unittest coverage
