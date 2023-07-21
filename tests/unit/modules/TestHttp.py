@@ -18,6 +18,16 @@ class TestHttpRequestSettings(unittest.TestCase):
         )
 
 
+"""
+OBSERVATIONS:
+
+Using use_default_user_agent=False in HttpRequestSettings
+and not setting headers= with the user-agent
+could result in the requests module using its own default user agent
+this happens further down the line after the mocked request api
+"""
+
+
 class TestHttpRequest(unittest.TestCase):
 
     def test_get_with_http_headers_user_agent(self) -> None:
